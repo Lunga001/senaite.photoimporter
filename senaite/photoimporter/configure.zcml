@@ -10,6 +10,8 @@
       attribute="import_ar_photos"
       permission="zope.Public"
     />
+
+  <include package=".extenders" />
   <include file="profiles.zcml" />
 
 </configure>

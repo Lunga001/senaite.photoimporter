@@ -4,6 +4,7 @@ import logging
 import imghdr
 import os
 from bika.lims.browser import BrowserView
+from bika.lims.catalog import CATALOG_ANALYSIS_REQUEST_LISTING
 from bika.lims.utils import tmpID
 from bika.lims import api
 from Products.CMFPlone.utils import _createObjectByType
@@ -17,12 +18,11 @@ class ARPhotosImporter(BrowserView):
     def import_ar_photos(self):
         """ You seed at 100, object added will start at 101
         """
-        import pdb; pdb.set_trace()
         logger.info('Inside import_ar_photos')
-        bc = getToolByName(self.context, 'bika_catalog')
+        bc= api.get_tool(CATALOG_ANALYSIS_REQUEST_LISTING)
         bsc = api.get_tool("bika_setup_catalog")
-        #folder = self.context.bika_setup.getPhotosFolder()
-        folder = os.environ.get('AR_PHOTOS_IMPORTER', '')
+        #folder = self.context.bika_setup.getPhotoImporterFolder()
+        folder = self.context.bika_setup.PhotoImporterFolder
         errors = []
         archive = []
         if not os.path.isdir(folder):
